@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv bash
+
+# application specific configurations
+[[ ! -f /config/www/laverna/index.html ]] && (
+
+    echo "Setting up Laverna at /config/www/laverna";
+    git clone -b gh-pages https://github.com/Laverna/static-laverna /config/www/laverna;
+) || echo "Laverna Installation found";
+
+# permissions
+chown -R alpine:alpine \
+    /config \
+    /var/tmp/nginx \
+    /config/www/laverna
+
+echo "Done";

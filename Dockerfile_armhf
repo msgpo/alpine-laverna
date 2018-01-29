@@ -1,0 +1,16 @@
+ARG ARCH=frommakefile
+ARG DOCKERSRC=frommakefile
+ARG USERNAME=frommakefile
+#
+FROM ${USERNAME}/${DOCKERSRC}:${ARCH}
+#
+ARG PUID=1001
+ARG PGID=1001
+#
+RUN set -xe \
+    && apk add --no-cache --purge -uU git \
+    && rm -rf /var/cache/apk/* /tmp/*
+# add local files
+COPY root/ /
+# ports, volumes etc from php
+# ENTRYPOINT ["/init"]
